@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import Slider from "@/shared/Slider/Slider";
-import {getAllBestSellingProducts } from "@/utils/dataService";
+import {getAllBestSellingProductsByBrand } from "@/utils/dataService";
 
 import ProductCard from "./ProductCard";
 import { Skeleton } from "./ui/skeleton";
@@ -14,7 +14,7 @@ const ProductSlider = () => {
 
   const fetchData = async () => {
     setIsLoading(true);
-    getAllBestSellingProducts()
+    getAllBestSellingProductsByBrand()
     .then((res: any) => {
       setData(res);
       setIsLoading(false);

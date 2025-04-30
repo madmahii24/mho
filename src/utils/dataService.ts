@@ -103,7 +103,20 @@ export async function getAllBestSellingProducts(): Promise<Product[]> {
     return [];
   }
 }
-
+export async function getAllBestSellingProductsByBrand(): Promise<Product[]> {
+  try {
+    const data = await get<Product[]>("/product/getAllProductByBrand/51");
+    // Ensure we have a valid array
+    if (!Array.isArray(data)) {
+      console.error("Expected array of products but got:", typeof data);
+      return [];
+    }
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch best selling products:", error);
+    return [];
+  }
+}
 export async function getAllBrands(): Promise<string[]> {
   try {
     const data = await get<string[]>("/product/getAllBrands");
@@ -200,7 +213,9 @@ export async function getProductByBrandId(brandId: string): Promise<Product[]> {
     return [];
   }
 }
-
+export async function getProductMedia(id: string): Promise<any> {
+  return get(`/product/getProductMediaaByProductId/${id}`);
+}
 export async function saveAddress(address: Address): Promise<any> {
   return post("/address/addNewAddress", address);
 }

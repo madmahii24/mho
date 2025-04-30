@@ -9,7 +9,7 @@ import SidebarFilters from "@/components/SideBarFilter";
 import ButtonSecondary from "@/shared/Button/ButtonSecondary";
 import Input from "@/shared/Input/Input";
 import {
-  getAllBestSellingProducts,
+  getAllBestSellingProductsByBrand,
   getProductByBrandId
 } from "@/utils/dataService";
 // Define your types
@@ -31,7 +31,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     if (activeBrand.brandName === "All") {
-      getAllBestSellingProducts().then((res: any) => {
+      getAllBestSellingProductsByBrand().then((res: any) => {
         setProducts(res);
       });
     } else {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import CarasoulBanner from "@/components/CarasoulBanner";
-import Features from "@/components/Features";
+// import Features from "@/components/Features";
 import IntermediateBanner from "@/components/IntermediateBanner";
 import SectionBestDeals from "@/components/SectionBestDeals";
 import Testimonials from "@/components/Testimonial";
@@ -20,9 +20,9 @@ const Page = () => {
       <div>
         <IntermediateBanner />
       </div>
-      <div>
+      {/* <div>
         <Features />
-      </div>
+      </div> */}
       <div>
         {/* Ensure dummyTestimonials is properly formatted with all required fields */}
         <Testimonials testimonials={dummyTestimonials || []} />

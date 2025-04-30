@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Slider } from "@/components/ui/slider";
-import { getAllBestSellingProducts } from "@/utils/dataService";
+import { getAllBestSellingProductsByBrand } from "@/utils/dataService";
 
 const defaultSort = "relevance";
 
@@ -45,15 +45,13 @@ const BestSellers = () => {
   const fetchFilteredData = async () => {
     setIsLoading(true);
     try {
-      const res = await getAllBestSellingProducts();
+      const res = await getAllBestSellingProductsByBrand();
       // Ensure we have a valid array
       setData(Array.isArray(res) ? res : []);
     } catch (error) {
       console.error("Failed to fetch filtered data:", error);
       setData([]);
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
 
   // On initial mount, fetch all data and determine price bounds.
@@ -61,7 +59,7 @@ const BestSellers = () => {
     const initialFetch = async () => {
       setIsLoading(true);
       try {
-        const res = await getAllBestSellingProducts();
+        const res = await getAllBestSellingProductsByBrand();
         
         // Ensure res is a valid array
         if (!Array.isArray(res)) {

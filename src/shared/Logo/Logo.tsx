@@ -14,7 +14,7 @@ const Logo: FC<LogoProps> = ({ className = 'hidden' }) => {
     <Link  href="/">
       {/* <RiMicrosoftLoopFill className="text-3xl text-primary" />{' '}
       <span className={`${className} text-2xl font-bold`}>Kleem</span> */}
-      <Image src={logo} alt="KELA LOGO" className={`${className} sm:h-[45px] h-[39px] w-auto my-1`}/>
+      <Image src={logo} alt="KELA LOGO" className={`${className} sm:h-[50px] h-[43px] w-auto my-1`}/>
     </Link>
   );
 };

@@ -1,13 +1,11 @@
 "use client";
 
 import "react-slideshow-image/dist/styles.css";
-
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Slide } from "react-slideshow-image";
 
-// Sample images
 const images = [
   {
     url: "/assets/images/banner_1.webp",
@@ -15,17 +13,10 @@ const images = [
     title: "Best Selling Products",
     subtitle: "Shop our most popular items",
   },
-  // You can add more images here
+  // Add more images as needed
 ];
 
-// ArrowButton moved outside main component
-const ArrowButton = ({
-  direction,
-  isVisible,
-}: {
-  direction: "left" | "right";
-  isVisible: boolean;
-}) => {
+const ArrowButton = ({ direction, isVisible }: { direction: "left" | "right"; isVisible: boolean }) => {
   const Icon = direction === "left" ? ChevronLeft : ChevronRight;
   const positionClass = direction === "left" ? "left-4" : "right-4";
 
@@ -47,22 +38,15 @@ const CarouselBanner = () => {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
-  // Check if it's mobile
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, path: string) => {
-    if (e.key === "Enter" || e.key === " ") {
-      router.push(path);
-    }
+    if (e.key === "Enter" || e.key === " ") router.push(path);
   };
 
   const properties = {
@@ -102,33 +86,19 @@ const CarouselBanner = () => {
               onKeyDown={(e) => handleKeyDown(e, image.path)}
               className="cursor-pointer relative"
             >
-              <div
-                style={{
-                  backgroundImage: `url(${image.url})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                }}
-                className="h-[250px] sm:h-[300px] md:h-[400px] lg:h-[550px] xl:h-[740px] relative"
-              >
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/10" />
-
-                {/* Optional Text Content */}
-                {/* Uncomment this block if you want title/subtitle/buttons inside banners */}
-                {/* 
-                <div className="absolute inset-0 flex flex-col justify-center pl-4 sm:pl-6 md:pl-8 lg:pl-16 xl:pl-24 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2 md:mb-3 tracking-tight">
-                    {image.title}
-                  </h2>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl opacity-90 mb-2 sm:mb-3 md:mb-4 lg:mb-6">
-                    {image.subtitle}
-                  </p>
-                  <button className="bg-white text-black font-semibold text-sm sm:text-base px-3 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-md hover:bg-opacity-90 transition w-fit">
-                    Shop Now
-                  </button>
-                </div> 
-                */}
+              {/* Aspect ratio container */}
+              <div className="relative aspect-[21/10]">
+                <div
+                  style={{
+                    backgroundImage: `url(${image.url})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                  className="w-full h-full"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/10" />
+                </div>
               </div>
             </div>
           ))}

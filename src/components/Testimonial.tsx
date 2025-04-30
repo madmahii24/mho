@@ -63,10 +63,10 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
   }, [currentSlide, itemsPerSlide]);
 
   return (
-    <section className="w-full py-24 bg-green-600 overflow-hidden">
+    <section className="w-full py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl font-semibold text-white text-center mb-16">
-          What Our Clients Say
+        <h2 className="text-4xl font-semibold text-black text-center mb-16">
+        What Our Customer Say
         </h2>
 
         <div className="relative " style={{ minHeight: "300px" }}>
