@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/accordion";
 import packet from "@/public/assets/images/mho_ws_ps_1.png";
 import packet1 from "@/public/assets/images/mho_ws_ps_2.png";
-import packet2 from "@/public/assets/images/product_2.webp"
+import packet2 from "@/public/assets/images/mho_ws_ps_4.png";
 import { addItem } from "@/store/cartSlice";
 
 import type { OptionItem } from "./ProductOptions";
@@ -86,7 +86,7 @@ interface SectionProductHeaderProps {
 
 const SectionProductHeader: FC<SectionProductHeaderProps> = ({ item }) => {
   const dispatch = useDispatch();
-  const shots = [packet, packet1,packet2]; // This should ideally come from product images
+  const shots = [packet, packet1, packet2]; // This should ideally come from product images
   const Router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [showZoomView] = useState(true);
@@ -238,7 +238,7 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({ item }) => {
           {/* Left Column: Product Image */}
           <div className="bg-white rounded-lg">
             <ImageShowCase shots={shots} showZoomView={showZoomView} />
-            
+
             {/* Product description - visible only on desktop */}
             <div className="mt-12 hidden md:block px-4 py-4">
               {item.productShortDesc && (
@@ -316,13 +316,13 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({ item }) => {
                 {item.productStarLine}
               </p>
             )}
-            
+
             {/* Size Variant Selection - Compact UI */}
             <div className="">
               <div className="flex items-center justify-between mb-1.5">
                 <p className="text-sm font-medium text-gray-700">Size</p>
                 {sizeOptions.length > 4 && (
-                  <button 
+                  <button
                     type="button"
                     className="text-xs text-green-600 hover:underline"
                   >
@@ -335,9 +335,11 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({ item }) => {
                   <button
                     key={option.value}
                     className={`min-w-[48px] px-2 py-1 text-sm rounded-md border transition-all
-                      ${selectedSize === option.value
-                        ? "border-green-500 bg-green-50 text-green-700 font-medium"
-                        : "border-gray-200 text-gray-600 hover:border-gray-300"}
+                      ${
+                        selectedSize === option.value
+                          ? "border-green-500 bg-green-50 text-green-700 font-medium"
+                          : "border-gray-200 text-gray-600 hover:border-gray-300"
+                      }
                       ${!option.inStock ? "opacity-50 cursor-not-allowed" : ""}`}
                     onClick={() => handleSizeSelect(option.value)}
                     disabled={!option.inStock}
@@ -362,12 +364,16 @@ const SectionProductHeader: FC<SectionProductHeaderProps> = ({ item }) => {
                   ₹{unitPrice}
                 </span>
                 {item.offerText && (
-                  <span className="text-xs bg-green-600 text-white px-2 py-1 rounded-full">
-                    {item.offerText}
-                  </span>
+                  <div className="flex flex-row gap-2  ">
+                    <p className="text-[12px] text-gray-400 mt-1">
+                      Incl. all taxes
+                    </p>
+                    <span className="text-xs bg-green-600 text-white px-2 py-1 rounded-full">
+                      {item.offerText}
+                    </span>
+                  </div>
                 )}
               </div>
-              <p className="text-xs text-gray-400 mt-1">Incl. all taxes</p>
             </div>
 
             {/* Quantity selector */}

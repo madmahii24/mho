@@ -1,0 +1,66 @@
+{
+  "site": {
+    "name": "Medini Natural",
+    "url": "https://medininatural.com/",
+    "logo": "https://medininatural.com/path-to-logo-image.jpg",
+    "description": "Your go-to destination for quality products and seamless shopping. Secure payments powered by Razorpay."
+  },
+  "navigation": [
+    { "label": "Home", "url": "/" },
+    { "label": "Products", "url": "/products" },
+    { "label": "About Us", "url": "/about" },
+    { "label": "Contact", "url": "/contact" }
+  ],
+  "banners": [
+    "carousel" :[ {
+    "url": "/assets/images/banner_1.webp",
+    "path": "/best-selling",
+    "title": "Best Selling Products",
+    "subtitle": "Shop our most popular items",
+  }],
+	"interSection" : {
+      "image": "https://medininatural.com/path-to-banner-image.jpg",
+      "alt": "Promotional Banner",
+      "link": "/best-selling"
+    }
+  ],
+  "footer": [
+  "policies": [
+    {
+      "title": "Privacy Policy",
+      "url": "https://merchant.razorpay.com/policy/Lx0k1g0rJXo5oP/privacy"
+    },
+    {
+      "title": "Refund Policy",
+      "url": "https://merchant.razorpay.com/policy/Lx0k1g0rJXo5oP/refund"
+    },
+    {
+      "title": "Shipping Policy",
+      "url": "https://merchant.razorpay.com/policy/Lx0k1g0rJXo5oP/shipping"
+    },
+    {
+      "title": "Terms of Service",
+      "url": "https://merchant.razorpay.com/policy/Lx0k1g0rJXo5oP/terms"
+    }
+  ],
+    "paymentPartner": {
+    "provider": "Razorpay",
+    "logo": "https://medininatural.com/path-to-razorpay-logo.jpg"
+  },
+  "socialLinks" :[
+	"facebook" :{"link" :},
+	"x" :{"link" :},
+	"instagram" :{"link" :},
+	"mail" :{"link" :}
+  ],
+    "contact": {
+    "phone": "+91 7249492878",
+    "email": "team@medininatural.com",
+    "address": "Office No. 28, Satyam Arcade, Ramwadi, Nagar Road, Viman Nagar, Pune 411014"
+  },
+  "footerText": {
+    "copyright": "© 2025 Medini.",
+    "rights": "All rights reserved."
+  }
+  ]
+}

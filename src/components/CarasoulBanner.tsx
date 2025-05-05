@@ -1,22 +1,18 @@
 "use client";
-
-import "react-slideshow-image/dist/styles.css";
+import React, { useEffect, useState } from "react";
+import { useSiteData } from "@/context/SiteDataContext";
+import { Slide } from "react-slideshow-image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 
-const images = [
-  {
-    url: "/assets/images/banner_1.webp",
-    path: "/best-selling",
-    title: "Best Selling Products",
-    subtitle: "Shop our most popular items",
-  },
-  // Add more images as needed
-];
-
-const ArrowButton = ({ direction, isVisible }: { direction: "left" | "right"; isVisible: boolean }) => {
+const ArrowButton = ({
+  direction,
+  isVisible,
+}: {
+  direction: "left" | "right";
+  isVisible: boolean;
+}) => {
   const Icon = direction === "left" ? ChevronLeft : ChevronRight;
   const positionClass = direction === "left" ? "left-4" : "right-4";
 
@@ -34,9 +30,12 @@ const ArrowButton = ({ direction, isVisible }: { direction: "left" | "right"; is
 };
 
 const CarouselBanner = () => {
+  const siteData = useSiteData();
+  console.log("siteData", siteData);
+  const router = useRouter();
+
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -45,19 +44,22 @@ const CarouselBanner = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  const banners = Array.isArray(siteData?.banners.carousel) ? siteData.banners.carousel : [];
+  console.log("banners----------", banners);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>, path: string) => {
     if (e.key === "Enter" || e.key === " ") router.push(path);
   };
 
   const properties = {
-    autoplay: false,
+    autoplay: true,
     transitionDuration: 500,
-    infinite: false,
+    infinite: true,
     pauseOnHover: true,
-    duration: 8000,
+    duration: 5000,
     indicators: () => (
-      <div className="flex justify-center gap-2 absolute bottom-4 md:bottom-6 left-0 right-0">
-        {images.map((_, idx) => (
+      <div className="flex justify-center gap-2 absolute bottom-4 md:bottom-6 left-0 right-0 z-10">
+        {banners.map((_, idx) => (
           <div
             key={idx}
             className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white cursor-pointer transition-all"
@@ -69,6 +71,12 @@ const CarouselBanner = () => {
     nextArrow: <ArrowButton direction="right" isVisible={isHovered || isMobile} />,
   };
 
+  if (!siteData || !banners.length) {
+    return (
+      <div className="h-[200px] bg-gray-100 animate-pulse rounded-md mx-8 my-4" />
+    );
+  }
+
   return (
     <div
       className="relative overflow-hidden text-white rounded-none sm:rounded-lg my-2 md:my-4 mx-0 sm:mx-8 md:mx-12 lg:mx-20"
@@ -77,16 +85,15 @@ const CarouselBanner = () => {
     >
       <div className="relative">
         <Slide {...properties}>
-          {images.map((image, index) => (
+          {banners.map((image, index) => (
             <div
               key={index}
               role="button"
               tabIndex={0}
-              onClick={() => router.push(image.path)}
-              onKeyDown={(e) => handleKeyDown(e, image.path)}
+              onClick={() => router.push(image.path || "/")}
+              onKeyDown={(e) => handleKeyDown(e, image.path || "/")}
               className="cursor-pointer relative"
             >
-              {/* Aspect ratio container */}
               <div className="relative aspect-[21/10]">
                 <div
                   style={{
@@ -97,7 +104,19 @@ const CarouselBanner = () => {
                   }}
                   className="w-full h-full"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/10" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/10" />
+                  <div className="absolute bottom-6 left-6 text-white z-10">
+                    {image.title && (
+                      <h2 className="text-xl md:text-3xl font-semibold drop-shadow">
+                        {image.title}
+                      </h2>
+                    )}
+                    {image.subtitle && (
+                      <p className="text-sm md:text-lg mt-1 drop-shadow">
+                        {image.subtitle}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
